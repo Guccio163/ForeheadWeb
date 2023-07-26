@@ -1,0 +1,24 @@
+
+.guessedButton{
+    text-align: center;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    font-weight:bolder;
+    border-radius: 10px;
+    height: 100%;
+    width: 45%;
+  }
+
+.greenButton{
+    background-color: rgb(34, 252, 34);
+    /* text-shadow: 10px 10px rgba(28, 91, 9, 0.921); */
+
+}
+
+.redButton{
+    background-color: red;
+    /* text-shadow: 10px 10px rgba(139, 23, 6, 0.921); */
+
+}
+
+
