@@ -1,25 +1,24 @@
-import './GuessedButton.css'
+import "./GuessedButton.css";
+
+const getColor = (option: string) => {
+  return option.localeCompare("wrong") === 0 ? "redButton" : "greenButton";
+};
 
 interface Props {
   option: string;
-  funct: ()=>void;
+  funct: () => void;
 }
 
-
-const getColor = (option:string) => {
-  return option.localeCompare("wrong")===0 ? "redButton" : "greenButton";
-}
-
-
-const GuessedButton = ({option, funct}:Props) => {
+export default function GuessedButton({ option, funct }: Props) {
   const colorOpt = getColor(option);
   const namee = "guessedButton " + colorOpt;
 
   return (
     <>
-    <button className={namee} onClick={funct}> {option} </button>
+      <button className={namee} onClick={funct}>
+        {" "}
+        {option}{" "}
+      </button>
     </>
-  )
+  );
 }
-
-export default GuessedButton

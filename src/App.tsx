@@ -1,32 +1,30 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import GuessedButton from "./components/GuessedButton.tsx";
-// import handleSubmit from "./handles/handlesubmit.tsx";
 
-function App() {
+export default function App() {
   const [artist, setArtist] = useState("lolz");
   const [title, setTitle] = useState("Basic");
   const [currentNum, setCurrentNum] = useState(0);
   const [total, setTotal] = useState(0);
 
-
-  const getRandomNumberInRange = (min: number, max: number): number => {
+  function getRandomNumberInRange(min: number, max: number): number {
     let ans = Math.floor(Math.random() * (max - min)) + min;
     ans = ans === currentNum ? (ans + 1) % max : ans;
     return ans;
   }
 
-  const refreshData = (myJson: string | any[]) => {
+  function refreshData(myJson: string | any[]) {
     setCurrentNum(getRandomNumberInRange(0, myJson.length));
-        setArtist(myJson[currentNum].artist);
-        setTitle(myJson[currentNum].title);
+    setArtist(myJson[currentNum].artist);
+    setTitle(myJson[currentNum].title);
   }
 
-  const increaseTotal = (total: number) => {
-    setTotal(total+1);
+  function increaseTotal(total: number) {
+    setTotal(total + 1);
   }
 
-  const getData = () => {
+  function getData() {
     fetch("songs.json", {
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +39,7 @@ function App() {
         console.log(myJson);
         refreshData(myJson);
       });
-  };
+  }
 
   useEffect(() => {
     getData();
@@ -74,9 +72,6 @@ function App() {
       </div>
 
       <p className="currentNum">{currentNum}</p>
-
     </div>
   );
 }
-
-export default App;
