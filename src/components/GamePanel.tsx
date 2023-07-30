@@ -111,7 +111,6 @@ export default function GamePanel() {
         <br />
         {/* <p className="currentNum">{currentNum}</p> */}
         {/* <p className="qCount">for debugging purposes: qCount {qCount}</p> */}
-        {recordArray}
       </div>
     );
   } else {
