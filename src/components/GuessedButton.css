@@ -3,17 +3,19 @@
   margin-left: 2.5%;
   margin-right: 2.5%;
   font-weight: bolder;
-  border-radius: 10px;
+  border-radius: 20px;
+  border: 1px;
   height: 100%;
   width: 45%;
+  background-blend-mode: darken;
 }
 
-.greenButton {
-  background-color: rgb(34, 252, 34);
+.right {
+  background-color: rgb(105, 238, 105, 0.8);
   /* text-shadow: 10px 10px rgba(28, 91, 9, 0.921); */
 }
 
-.redButton {
-  background-color: red;
+.wrong {
+  background-color: rgb(222, 39, 39, 0.8);
   /* text-shadow: 10px 10px rgba(139, 23, 6, 0.921); */
 }
