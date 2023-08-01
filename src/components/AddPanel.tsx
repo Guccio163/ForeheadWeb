@@ -1,17 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { firestore } from "../firebase";
 import {
   doc,
-  addDoc,
   collection,
   setDoc,
-  getDoc,
   getDocs,
   getCountFromServer,
-  DocumentData,
 } from "firebase/firestore";
-import { ref, onValue, refFromURL } from "firebase/database";
 
 class Song {
   Title: string;
@@ -25,12 +21,15 @@ class Song {
   }
 }
 
+
 export default function AddPanel() {
   const navi = useNavigate();
   const art: any = useRef();
   const tit: any = useRef();
   const labl: any = useRef();
   const ref = collection(firestore, "Songs");
+  // const [pelne, setPelne] = useState<string[]>([])
+  const [songi, setSongi] = useState<Song[]>([])
 
 
   // Function to handle the Promise and extract the integer value
@@ -60,35 +59,29 @@ async function getDocCount(): Promise<number> {
   };
 
 
-  const xdd = async () => {
-    let returnArray: string = "";
+  const getSongs = async () => {
+    // let returnAr: string[] = [];
+    let songi: Song[] = [];
     const querySnapshot = await getDocs(collection(firestore, "Songs"));
     querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.id, " => ", doc.data());
-      console.log(doc.id, "=> ", doc.data().Artist )
-      // alert(doc.data().Artist)
-      returnArray = returnArray + doc.data().Artist;
+      let song = doc.data();
+      // console.log(doc.id, " => ", doc.data());
+      // console.log(doc.id, "=> ", doc.data().Artist )
+      // returnAr.push(doc.data().Artist + " " + doc.data().Title)
+      let titt = song.Title
+      let artt = song.Artist
+      let newSong = new Song(artt, titt);
+      songi.push(newSong)
     });
-    
-      return returnArray;
-    
+      // setPelne(returnAr);
+      setSongi(songi);    
   };
 
-  async function getDataFromPromise(): Promise<string> {
-    try {
-      const result = await xdd();
-      return result;
-    } catch (error) {
-      console.error('Error fetching integer:', error);
-      return "pusta tablica"; // Return a default value if the Promise encounters an error
-    }
-  }
 
-  const lol = xdd();
+  getSongs();
 
   return (
-    <div>
+    <div style={{display:"flex", flexDirection:"column"}}>
       AddPanel
       <button
         onClick={() => navi(-1)}
@@ -96,24 +89,27 @@ async function getDocCount(): Promise<number> {
       >
         HOME
       </button>
-      <form onSubmit={handleSave}>
+      <form onSubmit={handleSave} style={{display:"flex", flexDirection:"column"}}>
         <label> Labl </label>
-        <input type="text" ref={labl} />
+        <input type="text" ref={labl} style={{width:"10vw"}}/>
         <label> Artist </label>
-        <input type="text" ref={art} />
+        <input type="text" ref={art} style={{width:"10vw"}}/>
         <label> Tile </label>
-        <input type="text" ref={tit} />
-        <button type="submit">SAVE</button>
+        <input type="text" ref={tit} style={{width:"10vw"}}/>
+        <button type="submit" style={{width:"10vw"}}>SAVE</button>
       </form>
-      {/* <button onClick={fetchSongs}>fetch</button>
-        <ul>
-        {songs.map((song) => (
-          <li key={song.id}>
-            {song.Artist} - {song.Title}
-          </li>
+
+      {/* <ul>
+        {pelne.map((item, index) => (
+          <li key={index}>{item}</li>
         ))}
-      </ul> */}
-      <p></p>
+      </ul>
+      /przerwa/ */}
+      <ul>
+        {songi.map((item, index) => (
+          <li key={index}>{item.Artist} // {item.Title}</li>
+        ))}
+      </ul>
     </div>
   );
 }
