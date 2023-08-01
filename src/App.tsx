@@ -7,7 +7,7 @@ export default function App() {
   const navi = useNavigate();
   return (
     <div className="homeScreen">
-      <h1> FOREHEAD </h1>
+      <h1 className="forehead"> FOREHEAD </h1>
       <button
         onClick={() => navi("/play")}
         style={{ background: "transparent", border: 0 }}
@@ -15,12 +15,18 @@ export default function App() {
         onMouseLeave={() => setFocus(false)}
       >
         {!focus ? (
-          <i className="bi bi-play"></i>
+          <i className="bi bi-play playbutton"></i>
         ) : (
-          <i className="bi bi-play-fill"></i>
+          <i className="bi bi-play-fill playbutton"></i>
         )}
       </button>
-      <p> Czółko v.0.1 </p>
+      <button
+        onClick={() => navi("/add")}
+        style={{ background: "transparent", border: 0, color: "red" }}
+      >
+        ADD
+      </button>
+      <p className="signature"> Czółko v.0.1 </p>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import ErrorPage from "./components/ErrorPage.tsx";
 import GamePanel from "./components/GamePanel.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import AddPanel from "./components/AddPanel";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,11 @@ const router = createBrowserRouter([
     path: "/play",
     element: <GamePanel />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "/add",
+    element: <AddPanel/>,
+    errorElement: <ErrorPage/>,
   },
 ]);
 

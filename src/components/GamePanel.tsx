@@ -111,19 +111,23 @@ export default function GamePanel() {
         <br />
         {/* <p className="currentNum">{currentNum}</p> */}
         {/* <p className="qCount">for debugging purposes: qCount {qCount}</p> */}
+        <p className="signature"> Czółko v.0.1 </p>
       </div>
     );
   } else {
     return (
-      <SummaryPage
-        playAgain={() => {
-          setQCount(0);
-          setRecordArray([]);
-        }}
-        setTotal={setTotal}
-        score={total}
-        questions={recordArray}
-      />
+      <>
+        <SummaryPage
+          playAgain={() => {
+            setQCount(0);
+            setRecordArray([]);
+          }}
+          setTotal={setTotal}
+          score={total}
+          questions={recordArray}
+        />
+        <p className="signature"> Czółko v.0.1 </p>
+      </>
     );
   }
 }
