@@ -1,4 +1,3 @@
-import "./GuessedButton.css";
 
 const getClassName = (option: string) => {
   return (
@@ -8,12 +7,12 @@ const getClassName = (option: string) => {
 
 interface Props {
   option: string;
-  funct: () => void;
+  onClick: () => void;
 }
 
-export default function GuessedButton({ option, funct }: Props) {
+export default function GuessedButton({ option, onClick }: Props) {
   return (
-    <button className={getClassName(option)} onClick={funct}>
+    <button className={getClassName(option)} onClick={onClick}>
       {option}
     </button>
   );

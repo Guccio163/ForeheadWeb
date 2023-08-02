@@ -1,31 +1,16 @@
-import { useState } from "react";
-import "./App.css";
-import { useNavigate } from "react-router-dom";
+import './App.css';
+import NavigateButton from './components/NavigateButton';
 
 export default function App() {
-  const [focus, setFocus] = useState(false);
-  const navi = useNavigate();
+
   return (
     <div className="homeScreen">
       <h1 className="forehead"> FOREHEAD </h1>
-      <button
-        onClick={() => navi("/play")}
-        style={{ background: "transparent", border: 0 }}
-        onMouseEnter={() => setFocus(true)}
-        onMouseLeave={() => setFocus(false)}
-      >
-        {!focus ? (
-          <i className="bi bi-play playbutton"></i>
-        ) : (
-          <i className="bi bi-play-fill playbutton"></i>
-        )}
-      </button>
-      <button
-        onClick={() => navi("/add")}
-        style={{ background: "transparent", border: 0, color: "red" }}
-      >
-        ADD
-      </button>
+      <div className='navigateButtonsPanel'>
+        <NavigateButton playPath="/playSongs" topCaption='PLAY' bottomCaption='SONGS'/>
+        <NavigateButton playPath="/playSongs" topCaption='PLAY' bottomCaption='CHARADES'/>
+        <NavigateButton playPath="/add" topCaption='ADD' bottomCaption='RECORDS'/>
+      </div>
       <p className="signature"> Czółko v.0.1 </p>
     </div>
   );

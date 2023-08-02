@@ -1,4 +1,74 @@
-.root {
+
+/* GENERAL */
+
+p {
+  margin-top: 0;
+  padding-bottom: 2px black;
+  font-size: 10px;
+}
+
+/* -------- PAGES -------- */
+
+/* HOME SCREEN */
+
+.homeScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.forehead {
+  margin-bottom: 10px;
+  color: rgb(165, 163, 163);
+}
+
+.navigateButtonsPanel {
+  display: flex;
+  flex-direction: row;
+}
+
+.signature {
+  bottom: 0;
+  color: rgb(160, 162, 164);
+}
+
+/* NAVIGATE BUTTON */
+
+.navigateButton {
+  width: 75px;
+  height: 130px;
+  margin-left: 15px;
+  margin-right: 15px;
+  background: transparent;
+  border: 0;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.focused {
+  background-color: rgb(235, 235, 235);
+}
+
+.caption {
+  align-self: center;
+  font-size: 14px;
+  position: relative;
+}
+
+.topCaption {
+  top: 10px;
+  left: -1px;
+}
+
+.bottomCaption {
+  top: -27px;
+}
+
+/* GAME PAGE */
+
+.gamePanel {
   height: 500px;
   background-color: rgb(178, 225, 255);
   flex-direction: row;
@@ -25,11 +95,6 @@
   margin-right: 10%;
 }
 
-.currentNum {
-  margin-left: 5%;
-  margin-top: 60px;
-}
-
 .total {
   font-size: 30px;
   text-align: center;
@@ -37,42 +102,64 @@
   font-weight: bold;
 }
 
-p{
-  margin-top: 0;
-  padding-bottom: 2px black;
-  font-size: 10px;
-}
+/* ADD RECORD PAGE */
 
-
-.homeScreen{
+.addForm{
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  background-image: url('../../public/chad.webp');
-  background-repeat: no-repeat;
-  background-position: fixed;
-  background-size: 100%;
-  height: 100vh;
+    align-items: center;
 }
 
-.forehead{
-  margin-bottom: 10px;
-  position: fixed;
-  top: 5px;
-  color: rgb(165, 163, 163);
+.formField{
+  width: 150px;
+  margin: 10px;
 }
 
-.playbutton{
+.formButton{
+  width: 80px;
+  margin: 10px;
+}
+
+/* -------- COMPONENTS -------- */
+
+/* NAVIGATE BUTTON */
+
+.playicon {
   font-size: 60px;
-  position: fixed;
-  top: 12.5vh;
-  left: 35vh;
+  position: relative;
+  top: -16px;
 }
 
-.signature{
-  position: fixed;
-  top:485px;
-  left: 0px;
-  color: rgb(160, 162, 164);
+/* GUESSED BUTTON */
+
+.guessedButton {
+  text-align: center;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  font-weight: bolder;
+  border-radius: 20px;
+  border: 1px;
+  height: 100%;
+  width: 45%;
+  background-blend-mode: darken;
+}
+
+.right {
+  background-color: rgb(105, 238, 105, 0.8);
+  /* text-shadow: 10px 10px rgba(28, 91, 9, 0.921); */
+}
+
+.wrong {
+  background-color: rgb(222, 39, 39, 0.8);
+  /* text-shadow: 10px 10px rgba(139, 23, 6, 0.921); */
+}
+
+/* HOME BUTTON */
+
+.homeButton{
+  background: transparent;
+  border: 0;
+  margin-top: 5px;
+  margin-left: 5px;
+  align-self: baseline;
 }

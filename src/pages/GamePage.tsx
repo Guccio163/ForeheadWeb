@@ -1,19 +1,17 @@
-import { useState, useEffect } from "react";
-import GuessedButton from "./GuessedButton.tsx";
-import { useNavigate } from "react-router-dom";
-import SummaryPage from "./SummaryPage.tsx";
-import "bootstrap/dist/css/bootstrap.css";
+import { useState, useEffect } from 'react';
+import GuessedButton from '../components/GuessedButton.tsx';
+import SummaryPage from './SummaryPage.tsx';
+import 'bootstrap/dist/css/bootstrap.css';
+import { HomeButton } from '../components/HomeButton.tsx';
 
 export default function GamePanel() {
-  const [artist, setArtist] = useState("lolz");
-  const [title, setTitle] = useState("Basic");
+  const [artist, setArtist] = useState('lolz');
+  const [title, setTitle] = useState('Basic');
   const [currentNum, setCurrentNum] = useState(0);
   const [total, setTotal] = useState(0);
   const [qCount, setQCount] = useState(-1);
   const [recordArray, setRecordArray] = useState<string[][]>([]);
-  const [focus, setFocus] = useState(false);
 
-  const navi = useNavigate();
 
   function getRandomNumberInRange(min: number, max: number): number {
     let ans = Math.floor(Math.random() * (max - min)) + min;
@@ -37,10 +35,10 @@ export default function GamePanel() {
   }
 
   function getData() {
-    fetch("songs.json", {
+    fetch('songs.json', {
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
     })
       .then((response) => {
@@ -64,26 +62,10 @@ export default function GamePanel() {
 
   if (qCount < 10) {
     return (
-      <div className="root">
+      <div className="gamePanel">
         {artist && artist.length > 0 && (
           <div>
-            <button
-              style={{
-                background: "transparent",
-                border: 0,
-                marginTop: "5px",
-                marginLeft: "5px",
-              }}
-              onClick={() => navi(-1)}
-              onMouseEnter={() => setFocus(true)}
-              onMouseLeave={() => setFocus(false)}
-            >
-              {" "}
-              <i
-                className={!focus ? "bi bi-house" : "bi bi-house-fill"}
-                style={{ fontSize: "25px" }}
-              />
-            </button>
+            <HomeButton/>
             <p className="title">{title}</p>
             <p className="artist">{artist}</p>
           </div>
@@ -94,23 +76,21 @@ export default function GamePanel() {
         <div className="buttonWrapper">
           <GuessedButton
             option="wrong"
-            funct={() => {
+            onClick={() => {
               getData();
-              addToList(title, artist, "f");
+              addToList(title, artist, 'f');
             }}
           />
           <GuessedButton
             option="right"
-            funct={() => {
+            onClick={() => {
               getData();
               increaseTotal();
-              addToList(title, artist, "r");
+              addToList(title, artist, 'r');
             }}
           />
-        </div>{" "}
+        </div>{' '}
         <br />
-        {/* <p className="currentNum">{currentNum}</p> */}
-        {/* <p className="qCount">for debugging purposes: qCount {qCount}</p> */}
         <p className="signature"> Czółko v.0.1 </p>
       </div>
     );

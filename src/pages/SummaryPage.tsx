@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { HomeButton } from "../components/HomeButton";
 
 interface Props {
   playAgain: any;
@@ -13,7 +13,6 @@ export default function SummaryPage({
   score,
   questions,
 }: Props) {
-  const navi = useNavigate();
 
   function isRight(option: string) {
     return option.localeCompare("r") === 0 ? true : false;
@@ -23,6 +22,7 @@ export default function SummaryPage({
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
+      <HomeButton/>
       <h2 style={{ margin: "10px" }}>
         Congratulations, you scored {score} points!
       </h2>
@@ -46,7 +46,6 @@ export default function SummaryPage({
       >
         press to play again
       </button>
-      <button onClick={() => navi("/")}> press to go home</button>
     </div>
   );
 }

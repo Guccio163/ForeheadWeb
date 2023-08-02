@@ -1,32 +1,32 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ErrorPage from "./components/ErrorPage.tsx";
-import GamePanel from "./components/GamePanel.tsx";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import AddPanel from "./components/AddPanel";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.tsx';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import ErrorPage from './pages/ErrorPage.tsx';
+import GamePage from './pages/GamePage.tsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import AddRecordPage from './pages/AddRecordPage.tsx';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/play",
-    element: <GamePanel />,
+    path: '/playSongs',
+    element: <GamePage />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/add",
-    element: <AddPanel/>,
-    errorElement: <ErrorPage/>,
+    path: '/add',
+    element: <AddRecordPage />,
+    errorElement: <ErrorPage />,
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
