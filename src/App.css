@@ -120,6 +120,14 @@ p {
   margin: 10px;
 }
 
+/* SUMMARY PAGE */
+
+.summaryPage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* -------- COMPONENTS -------- */
 
 /* NAVIGATE BUTTON */
