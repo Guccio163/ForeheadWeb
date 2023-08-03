@@ -1,8 +1,9 @@
 import { collection, getDocs } from 'firebase/firestore';
-import { HomeButton } from '../components/HomeButton';
+import { HomeButton } from '../components/Buttons/HomeButton';
 import { firestore } from '../firebase';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { BackButton } from '../components/Buttons/BackButton';
 
 type Song = {
   title: string;
@@ -49,10 +50,14 @@ const SeeRecordsPage = () => {
 
   console.log(name);
   return (
-    <>
-      <HomeButton />
+    <div className="recordsPage">
+      <div className="recordsPageNavBar">
+        <HomeButton />
+        <BackButton />
+      </div>
+
       {colName === 'Songs' ? (
-        <ul>
+        <ul className="recordsList">
           {songi.map((item, index) => (
             <li key={index}>
               {item.artist} // {item.title}
@@ -60,13 +65,13 @@ const SeeRecordsPage = () => {
           ))}
         </ul>
       ) : (
-        <ul>
+        <ul className="recordsList">
           {charades.map((item, index) => (
             <li key={index}>{item}</li>
           ))}
         </ul>
       )}
-    </>
+    </div>
   );
 };
 

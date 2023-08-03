@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import GuessedButton from '../components/GuessedButton.tsx';
+import GuessedButton from '../components/Buttons/GuessedButton.tsx';
 import SummaryPage from './SummaryPage.tsx';
 import 'bootstrap/dist/css/bootstrap.css';
-import { HomeButton } from '../components/HomeButton.tsx';
+import { HomeButton } from '../components/Buttons/HomeButton.tsx';
 
 export default function GamePanel() {
   const [artist, setArtist] = useState('lolz');
@@ -11,7 +11,6 @@ export default function GamePanel() {
   const [total, setTotal] = useState(0);
   const [qCount, setQCount] = useState(-1);
   const [recordArray, setRecordArray] = useState<string[][]>([]);
-
 
   function getRandomNumberInRange(min: number, max: number): number {
     let ans = Math.floor(Math.random() * (max - min)) + min;
@@ -65,7 +64,7 @@ export default function GamePanel() {
       <div className="gamePanel">
         {artist && artist.length > 0 && (
           <div>
-            <HomeButton/>
+            <HomeButton />
             <p className="title">{title}</p>
             <p className="artist">{artist}</p>
           </div>

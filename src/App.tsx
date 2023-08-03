@@ -1,5 +1,5 @@
 import './App.css';
-import NavigateButton from './components/NavigateButton';
+import NavigateButton from './components/Buttons/NavigateButton';
 
 export default function App() {
 

@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { firestore } from '../firebase';
 import { doc, collection, setDoc, getCountFromServer } from 'firebase/firestore';
-import { HomeButton } from '../components/HomeButton';
+import { HomeButton } from '../components/Buttons/HomeButton';
 import { useNavigate } from 'react-router-dom';
 
 export default function AddPanel() {
@@ -59,15 +59,14 @@ export default function AddPanel() {
         </button>
       </form>
       <form className="myForm">
-        <select id="chooseOption" name="chooseOption" ref={colName}>
+        <select id="chooseOption" className="formField" ref={colName}>
           <option value="Songs">Songs</option>
           <option value="Charades">Charades</option>
         </select>
         <button
-          className="seeRecords"
+          className="seeRecordsButton"
           onClick={() => {
             navi(`/records?colName=${colName.current.value}`);
-            // console.log(colName.current.value);
           }}
         >
           RECORDS
