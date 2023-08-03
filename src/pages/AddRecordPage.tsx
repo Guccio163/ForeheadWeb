@@ -9,6 +9,7 @@ export default function AddPanel() {
   const artist: any = useRef();
   const title: any = useRef();
   const label: any = useRef();
+  const colName: any = useRef();
   const ref = collection(firestore, 'Songs');
 
   async function getDocCount(): Promise<number> {
@@ -40,7 +41,7 @@ export default function AddPanel() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <HomeButton />
-      <form onSubmit={handleSave} className="addForm">
+      <form onSubmit={handleSave} className="myForm">
         <label>
           {'Label: '}
           <input type="text" ref={label} className="formField" />
@@ -57,9 +58,21 @@ export default function AddPanel() {
           SAVE
         </button>
       </form>
-      <button className="seeRecords" onClick={() => navi('/records')}>
-        RECORDS
-      </button>
+      <form className="myForm">
+        <select id="chooseOption" name="chooseOption" ref={colName}>
+          <option value="Songs">Songs</option>
+          <option value="Charades">Charades</option>
+        </select>
+        <button
+          className="seeRecords"
+          onClick={() => {
+            navi(`/records?colName=${colName.current.value}`);
+            // console.log(colName.current.value);
+          }}
+        >
+          RECORDS
+        </button>
+      </form>
     </div>
   );
 }
