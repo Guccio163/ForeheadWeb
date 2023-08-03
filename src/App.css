@@ -120,6 +120,11 @@ p {
   margin: 10px;
 }
 
+.seeRecords{
+  width: 90px;
+  align-self: center;
+}
+
 /* SUMMARY PAGE */
 
 .summaryPage{

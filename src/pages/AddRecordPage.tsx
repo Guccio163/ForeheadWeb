@@ -1,21 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { firestore } from '../firebase';
-import { doc, collection, setDoc, getDocs, getCountFromServer } from 'firebase/firestore';
+import { doc, collection, setDoc, getCountFromServer } from 'firebase/firestore';
 import { HomeButton } from '../components/HomeButton';
-
-type Song = {
-  title: string;
-  artist: string;
-};
+import { useNavigate } from 'react-router-dom';
 
 export default function AddPanel() {
+  const navi = useNavigate();
   const artist: any = useRef();
   const title: any = useRef();
   const label: any = useRef();
   const ref = collection(firestore, 'Songs');
-  const [songi, setSongi] = useState<Song[]>([]);
 
-  // Function to handle the Promise and extract the integer value
   async function getDocCount(): Promise<number> {
     try {
       const snapshot = await getCountFromServer(ref);
@@ -23,7 +18,7 @@ export default function AddPanel() {
       return result;
     } catch (error) {
       console.error('Error fetching integer:', error);
-      return 0; // Return a default value if the Promise encounters an error
+      return 0;
     }
   }
 
@@ -42,33 +37,10 @@ export default function AddPanel() {
     });
   };
 
-  const getSongs = async () => {
-    // let returnAr: string[] = [];
-    let songi: Song[] = [];
-    const querySnapshot = await getDocs(collection(firestore, 'Songs'));
-    querySnapshot.forEach((doc) => {
-      let song = doc.data();
-      // console.log(doc.id, " => ", doc.data());
-      // console.log(doc.id, "=> ", doc.data().Artist )
-      // returnAr.push(doc.data().Artist + " " + doc.data().Title)
-      // let titt = song.Title;
-      // let artt = song.Artist;
-      let newSong: Song = { title: song.Title, artist: song.Artist };
-      songi.push(newSong);
-    });
-    // setPelne(returnAr);
-    setSongi(songi);
-  };
-
-  useEffect(() => {
-    getSongs();
-    console.log('xd');
-  }, []);
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <HomeButton/>
-      <form onSubmit={handleSave} className='addForm'>
+      <HomeButton />
+      <form onSubmit={handleSave} className="addForm">
         <label>
           {'Label: '}
           <input type="text" ref={label} className="formField" />
@@ -85,19 +57,9 @@ export default function AddPanel() {
           SAVE
         </button>
       </form>
-      {/* <ul>
-        {pelne.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
-      /przerwa/ */}
-      <ul>
-        {songi.map((item, index) => (
-          <li key={index}>
-            {item.artist} // {item.title}
-          </li>
-        ))}
-      </ul>
+      <button className="seeRecords" onClick={() => navi('/records')}>
+        RECORDS
+      </button>
     </div>
   );
 }
