@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 export default function AddPanel() {
   const navi = useNavigate();
   const collectionRef: any = useRef();
-  const labelRef: any = useRef();
   const artistRef: any = useRef();
   const titleRef: any = useRef();
   const textRef: any = useRef();
@@ -30,27 +29,24 @@ export default function AddPanel() {
   const handleSave = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     const ref = collection(firestore, collectionRef.current.value);
-    let countt = await getDocCount();
+    let docCount = await getDocCount();
 
     if (collectionRef.current.value === 'Songs') {
-      let label = `${countt}. ${labelRef.current.value}`;
       let artist = artistRef.current.value;
       let title = titleRef.current.value;
       if (formRef.current) {
         formRef.current.reset();
-
       }
-      await setDoc(doc(ref, label), {
+      await setDoc(doc(ref, `${docCount}. ${title}`), {
         Artist: artist,
         Title: title,
       });
     } else {
-      let label = `${countt}. ${labelRef.current.value}`;
       let text = textRef.current.value;
       if (formRef.current) {
         formRef.current.reset();
       }
-      await setDoc(doc(ref, label), {
+      await setDoc(doc(ref, `${docCount}. ${text}`), {
         Text: text,
       });
     }
@@ -83,10 +79,6 @@ export default function AddPanel() {
           </select>
         </label>
         <form onSubmit={handleSave} ref={formRef} className="myForm">
-          <label>
-            {'Label: '}
-            <input type="text" ref={labelRef} className="formField" />
-          </label>
           <label style={{ display: isSongs ? 'block' : 'none' }}>
             {'Artist: '}
             <input type="text" ref={artistRef} className="formField songField" />

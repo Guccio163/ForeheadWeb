@@ -18,6 +18,7 @@ export default function SummaryPage({ playAgain, setTotal, score, questions }: P
         onClick={() => {
           playAgain();
           setTotal(0);
+          
         }}
         style={{ marginBottom: '5px' }}
       >
