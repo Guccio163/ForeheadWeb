@@ -7,7 +7,7 @@ import GamePage from './pages/GamePage.tsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import AddRecordPage from './pages/AddRecordPage.tsx';
-import SeeRecordsPage from './pages/SeeRecordsPage.tsx';
+import RecordsPage from './pages/RecordsPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/records',
-    element: <SeeRecordsPage/>,
+    element: <RecordsPage/>,
     errorElement: <ErrorPage />,
   },
 ]);

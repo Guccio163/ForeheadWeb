@@ -48,10 +48,6 @@ export default function GamePanel() {
         console.log(myJson);
         refreshData(myJson);
         setQCount(qCount + 1);
-        // const art = myJson[currentNum].artist;
-        // const tit = myJson[currentNum].title + "  ";
-        // const rec: string[] = [tit, art];
-        // setRecordArray([...recordArray, rec]);
       });
   }
 

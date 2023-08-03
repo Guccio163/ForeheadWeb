@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { firestore } from '../firebase';
 import { doc, collection, setDoc, getCountFromServer } from 'firebase/firestore';
 import { HomeButton } from '../components/Buttons/HomeButton';
@@ -6,13 +6,18 @@ import { useNavigate } from 'react-router-dom';
 
 export default function AddPanel() {
   const navi = useNavigate();
-  const artist: any = useRef();
-  const title: any = useRef();
-  const label: any = useRef();
-  const colName: any = useRef();
-  const ref = collection(firestore, 'Songs');
+  const collectionRef: any = useRef();
+  const labelRef: any = useRef();
+  const artistRef: any = useRef();
+  const titleRef: any = useRef();
+  const textRef: any = useRef();
+  const formRef: any = useRef();
+
+  const [isSongs, setIstSongs] = useState(true);
 
   async function getDocCount(): Promise<number> {
+    const ref = collection(firestore, collectionRef.current.value);
+
     try {
       const snapshot = await getCountFromServer(ref);
       const result = snapshot.data().count;
@@ -25,48 +30,79 @@ export default function AddPanel() {
 
   const handleSave = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-
+    const ref = collection(firestore, collectionRef.current.value);
     let countt = await getDocCount();
-    // template string
-    let nazwa = `${countt}. ${label.current.value}`;
-    console.log(nazwa);
-    let arti = artist.current.value;
-    let titl = title.current.value;
-    await setDoc(doc(ref, nazwa), {
-      Artist: arti,
-      Title: titl,
-    });
+
+    if (collectionRef.current.value === 'Songs') {
+      let label = `${countt}. ${labelRef.current.value}`;
+      let artist = artistRef.current.value;
+      let title = titleRef.current.value;
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+      await setDoc(doc(ref, label), {
+        Artist: artist,
+        Title: title,
+      });
+    } else {
+      let label = `${countt}. ${labelRef.current.value}`;
+      let text = textRef.current.value;
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+      await setDoc(doc(ref, label), {
+        Text: text,
+      });
+    }
+    
+  };
+
+  const handleCollectionChange = (e: { target: { value: any } }) => {
+    const newValue = e.target.value;
+    if (newValue === 'Songs') {
+      setIstSongs(true);
+    } else {
+      setIstSongs(false);
+    }
+    console.log(`Zmieniono opcję na: ${newValue}`);
   };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <HomeButton />
-      <form onSubmit={handleSave} className="myForm">
+      <form onSubmit={handleSave} className="myForm" ref={formRef}>
+        <select
+          id="chooseOption"
+          className="formField"
+          ref={collectionRef}
+          onChange={handleCollectionChange}
+        >
+          <option value="Songs">Songs</option>
+          <option value="Charades">Charades</option>
+        </select>
         <label>
           {'Label: '}
-          <input type="text" ref={label} className="formField" />
+          <input type="text" ref={labelRef} className="formField" />
         </label>
-        <label>
+        <label style={{ display: isSongs ? 'block' : 'none' }}>
           {'Artist: '}
-          <input type="text" ref={artist} className="formField" />
+          <input type="text" ref={artistRef} className="formField songField" />
         </label>
-        <label>
+        <label style={{ display: isSongs ? 'block' : 'none' }}>
           {'Title: '}
-          <input type="text" ref={title} className="formField" />
+          <input type="text" ref={titleRef} className="formField songField" />
+        </label>
+        <label style={{ display: isSongs ? 'none' : 'block' }}>
+          {'Text: '}
+          <input type="text" ref={textRef} className="formField charadeField" />
         </label>
         <button type="submit" className="formButton">
           SAVE
         </button>
-      </form>
-      <form className="myForm">
-        <select id="chooseOption" className="formField" ref={colName}>
-          <option value="Songs">Songs</option>
-          <option value="Charades">Charades</option>
-        </select>
         <button
           className="seeRecordsButton"
           onClick={() => {
-            navi(`/records?colName=${colName.current.value}`);
+            navi(`/records?collectionName=${collectionRef.current.value}`);
           }}
         >
           RECORDS
