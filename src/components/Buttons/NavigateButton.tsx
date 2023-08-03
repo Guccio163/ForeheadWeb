@@ -7,9 +7,22 @@ interface Props {
   bottomCaption: string;
 }
 
+function getIconName(caption:string):string{
+  if (caption === 'SONGS') {
+    return 'musicicon bi-file-music';
+  } else if (caption === 'CHARADES') {
+    return 'playicon bi-chat-left-quote';
+  } else{
+    return 'plusicon bi-plus-square';
+  }
+}
+
 const NavigateButton = ({ playPath, topCaption, bottomCaption }: Props) => {
   const navi = useNavigate();
   const [focus, setFocus] = useState(false);
+  const iconName = getIconName(bottomCaption);
+  const emptyIconName = `bi ${iconName}`;
+  const filledIconName = `bi ${iconName}-fill`;
 
   return (
     <button
@@ -20,9 +33,9 @@ const NavigateButton = ({ playPath, topCaption, bottomCaption }: Props) => {
     >
       <p className="caption topCaption">{topCaption}</p>
       {focus ? (
-        <i className="bi bi-play-fill playicon"></i>
+        <i className={filledIconName}></i>
       ) : (
-        <i className="bi bi-play playicon"></i>
+        <i className={emptyIconName}></i>
       )}
       <p className="caption bottomCaption">{bottomCaption}</p>
     </button>

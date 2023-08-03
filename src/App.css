@@ -32,39 +32,6 @@ p {
   color: rgb(160, 162, 164);
 }
 
-/* NAVIGATE BUTTON */
-
-.navigateButton {
-  width: 75px;
-  height: 130px;
-  margin-left: 15px;
-  margin-right: 15px;
-  background: transparent;
-  border: 0;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.focused {
-  background-color: rgb(235, 235, 235);
-}
-
-.caption {
-  align-self: center;
-  font-size: 14px;
-  position: relative;
-}
-
-.topCaption {
-  top: 10px;
-  left: -1px;
-}
-
-.bottomCaption {
-  top: -27px;
-}
-
 /* GAME PAGE */
 
 .gamePanel {
@@ -137,7 +104,7 @@ p {
   width: 80px;
 }
 
-.recordsList{
+.recordsList {
   margin-top: 50px;
 }
 
@@ -153,9 +120,61 @@ p {
 
 /* NAVIGATE BUTTON */
 
-.playicon {
-  font-size: 60px;
+.navigateButton {
+  width: 75px;
+  height: 130px;
+  margin-left: 15px;
+  margin-right: 15px;
+  background: transparent;
+  border: 0;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.focused {
+  background-color: rgb(235, 235, 235);
+}
+
+.caption {
+  align-self: center;
+  font-size: 14px;
   position: relative;
+}
+
+.topCaption {
+  top: 10px;
+  left: -1px;
+}
+
+.bottomCaption {
+  top: -27px;
+}
+
+.playicon {
+  font-size: 46px;
+  position: relative;
+    align-self: center;
+  margin-top: 11px;
+  margin-bottom: 9px;
+  top: -16px;
+}
+
+.musicicon {
+  font-size: 44px;
+  position: relative;
+  align-self: center;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  top: -16px;
+}
+
+.plusicon {
+  font-size: 40px;
+  position: relative;
+  align-self: center;
+  margin-top: 14px;
+  margin-bottom: 15px;
   top: -16px;
 }
 

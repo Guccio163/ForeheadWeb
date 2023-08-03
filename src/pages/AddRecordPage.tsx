@@ -12,7 +12,6 @@ export default function AddPanel() {
   const titleRef: any = useRef();
   const textRef: any = useRef();
   const formRef: any = useRef();
-
   const [isSongs, setIstSongs] = useState(true);
 
   async function getDocCount(): Promise<number> {
@@ -39,6 +38,7 @@ export default function AddPanel() {
       let title = titleRef.current.value;
       if (formRef.current) {
         formRef.current.reset();
+
       }
       await setDoc(doc(ref, label), {
         Artist: artist,
@@ -54,7 +54,6 @@ export default function AddPanel() {
         Text: text,
       });
     }
-    
   };
 
   const handleCollectionChange = (e: { target: { value: any } }) => {
@@ -70,44 +69,49 @@ export default function AddPanel() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <HomeButton />
-      <form onSubmit={handleSave} className="myForm" ref={formRef}>
-        <select
-          id="chooseOption"
-          className="formField"
-          ref={collectionRef}
-          onChange={handleCollectionChange}
-        >
-          <option value="Songs">Songs</option>
-          <option value="Charades">Charades</option>
-        </select>
+      <div className="myForm">
         <label>
-          {'Label: '}
-          <input type="text" ref={labelRef} className="formField" />
+          {'Category: '}
+          <select
+            id="chooseOption"
+            className="formField"
+            ref={collectionRef}
+            onChange={handleCollectionChange}
+          >
+            <option value="Songs">Songs</option>
+            <option value="Charades">Charades</option>
+          </select>
         </label>
-        <label style={{ display: isSongs ? 'block' : 'none' }}>
-          {'Artist: '}
-          <input type="text" ref={artistRef} className="formField songField" />
-        </label>
-        <label style={{ display: isSongs ? 'block' : 'none' }}>
-          {'Title: '}
-          <input type="text" ref={titleRef} className="formField songField" />
-        </label>
-        <label style={{ display: isSongs ? 'none' : 'block' }}>
-          {'Text: '}
-          <input type="text" ref={textRef} className="formField charadeField" />
-        </label>
-        <button type="submit" className="formButton">
-          SAVE
-        </button>
-        <button
-          className="seeRecordsButton"
-          onClick={() => {
-            navi(`/records?collectionName=${collectionRef.current.value}`);
-          }}
-        >
-          RECORDS
-        </button>
-      </form>
+        <form onSubmit={handleSave} ref={formRef} className="myForm">
+          <label>
+            {'Label: '}
+            <input type="text" ref={labelRef} className="formField" />
+          </label>
+          <label style={{ display: isSongs ? 'block' : 'none' }}>
+            {'Artist: '}
+            <input type="text" ref={artistRef} className="formField songField" />
+          </label>
+          <label style={{ display: isSongs ? 'block' : 'none' }}>
+            {'Title: '}
+            <input type="text" ref={titleRef} className="formField songField" />
+          </label>
+          <label style={{ display: isSongs ? 'none' : 'block' }}>
+            {'Text: '}
+            <input type="text" ref={textRef} className="formField charadeField" />
+          </label>
+          <button type="submit" className="formButton">
+            SAVE
+          </button>
+          <button
+            className="seeRecordsButton"
+            onClick={() => {
+              navi(`/records?collectionName=${collectionRef.current.value}`);
+            }}
+          >
+            RECORDS
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
