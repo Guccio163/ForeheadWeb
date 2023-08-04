@@ -1,21 +1,21 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import GuessedButton from '../components/Buttons/GuessedButton.tsx';
 import SummaryPage from './SummaryPage.tsx';
 import 'bootstrap/dist/css/bootstrap.css';
 import { HomeButton } from '../components/Buttons/HomeButton.tsx';
 import { Song, getSongsShuffled, shuffleArray } from '../components/Lists/SongsList.tsx';
+import { getCharadesShuffled } from '../components/Lists/CharadesList.tsx';
 
-type Records = {
+export type Results = {
   tit: string;
-  art: string;
   res: string;
 };
 
-export default function GamePanel() {
+export default function CharadesGamePage() {
   const [total, setTotal] = useState(0);
   const [qCount, setQCount] = useState(0);
-  const [questions, setQuestions] = useState<Song[]>([]);
-  const [recordArray, setRecordArray] = useState<Records[]>([]);
+  const [questions, setQuestions] = useState<string[]>([]);
+  const [recordArray, setRecordArray] = useState<Results[]>([]);
 
   // function refreshData(myJson: string | any[]) {
   //   // ZMIEŃ DŁUGOŚĆ NA NP. 10
@@ -24,14 +24,24 @@ export default function GamePanel() {
   //   setTitle(myJson[currentNum].title);
   // }
 
-  function addToList(tit: string, art: string, res: string) {
-    const rec = { tit, art, res };
+  function addToList(tit: string, res: string) {
+    const rec = { tit, res };
     setRecordArray([...recordArray, rec]);
   }
 
-  async function fetchSongs() {
+//   async function fetchSongs() {
+//     try {
+//       const qr = await getSongsShuffled();
+//       setQuestions(qr);
+//       console.log('qr', qr);
+//     } catch (error) {
+//       console.error('Błąd podczas pobierania danych:', error);
+//     }
+//   }
+
+  async function fetchCharades() {
     try {
-      const qr = await getSongsShuffled();
+      const qr = await getCharadesShuffled();
       setQuestions(qr);
       console.log('qr', qr);
     } catch (error) {
@@ -40,17 +50,16 @@ export default function GamePanel() {
   }
 
   useEffect(() => {
-    fetchSongs();
+    fetchCharades();
   }, []);
 
-  if (qCount < 4) {
+  if (qCount < 2) {
     return (
       <div className="gamePanel">
-        {questions[qCount]?.artist && questions[qCount].artist.length > 0 && (
+        {questions[qCount] && questions[qCount].length > 0 && (
           <div>
             <HomeButton />
-            <p className="title">{questions[qCount].title}</p>
-            <p className="artist">{questions[qCount].artist}</p>
+            <p className="title">{questions[qCount]}</p>
           </div>
         )}
         <p className="total">
@@ -62,7 +71,7 @@ export default function GamePanel() {
             onClick={() => {
               setQCount((prevIndex) => prevIndex + 1);
 
-              addToList(questions[qCount].title, questions[qCount].artist, 'f');
+              addToList(questions[qCount], 'f');
             }}
           />
           <GuessedButton
@@ -71,7 +80,7 @@ export default function GamePanel() {
               setQCount((prevIndex) => prevIndex + 1);
 
               setTotal((total) => total + 1);
-              addToList(questions[qCount].title, questions[qCount].artist, 'r');
+              addToList(questions[qCount], 'r');
             }}
           />
         </div>{' '}
@@ -86,11 +95,11 @@ export default function GamePanel() {
           playAgain={() => {
             setQCount(0);
             setRecordArray([]);
-            setQuestions(shuffleArray(questions));
+            setQuestions(questions);
           }}
           setTotal={setTotal}
           score={total}
-          questions={[]}
+          questions={recordArray}
         />
         <p className="signature"> Czółko v.0.1 </p>
       </>

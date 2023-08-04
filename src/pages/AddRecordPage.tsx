@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export default function AddPanel() {
   const navi = useNavigate();
   const collectionRef: any = useRef();
-  const artistRef: any = useRef();
+  const artistRef = useRef<HTMLInputElement>(null);
   const titleRef: any = useRef();
   const textRef: any = useRef();
   const formRef: any = useRef();
@@ -31,7 +31,7 @@ export default function AddPanel() {
     const ref = collection(firestore, collectionRef.current.value);
     let docCount = await getDocCount();
 
-    if (collectionRef.current.value === 'Songs') {
+    if (collectionRef.current.value === 'Songs' && artistRef.current) {
       let artist = artistRef.current.value;
       let title = titleRef.current.value;
       if (formRef.current) {

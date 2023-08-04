@@ -11,6 +11,7 @@ p {
 /* HOME SCREEN */
 
 .homeScreen {
+  height: 100dvh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,13 +19,14 @@ p {
 }
 
 .forehead {
-  margin-bottom: 10px;
+  margin-bottom: 100px;
   color: rgb(165, 163, 163);
 }
 
 .navigateButtonsPanel {
   display: flex;
   flex-direction: row;
+    margin-bottom: 100px;
 }
 
 .signature {
@@ -35,7 +37,7 @@ p {
 /* GAME PAGE */
 
 .gamePanel {
-  height: 500px;
+  height: 100dvh;
   background-color: rgb(178, 225, 255);
   flex-direction: row;
   color: rgb(0, 0, 0);

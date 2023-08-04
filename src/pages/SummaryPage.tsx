@@ -1,11 +1,14 @@
 import { HomeButton } from '../components/Buttons/HomeButton';
 import { QuestionsList } from '../components/Lists/QuestionsList';
+import { Results as SongsResults} from './SongGamePage';
+import { Results as CharadesResults } from './CharadesGamePage';
+
 
 interface Props {
   playAgain: any;
   setTotal: any;
   score: number;
-  questions: string[][];
+  questions: SongsResults[] | CharadesResults[];
 }
 
 export default function SummaryPage({ playAgain, setTotal, score, questions }: Props) {
@@ -18,7 +21,6 @@ export default function SummaryPage({ playAgain, setTotal, score, questions }: P
         onClick={() => {
           playAgain();
           setTotal(0);
-          
         }}
         style={{ marginBottom: '5px' }}
       >

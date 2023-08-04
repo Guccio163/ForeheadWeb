@@ -11,6 +11,18 @@ export const shuffleArray = (array: string[]) => {
   return shuffledArray;
 };
 
+export const getCharadesShuffled = async () => {
+  let charades: string[] = [];
+  const querySnapshot = await getDocs(collection(firestore, 'Charades'));
+  querySnapshot.forEach((doc) => {
+    let charade = doc.data();
+    let newCharade: string = charade.Text;
+    charades.push(newCharade);
+  });
+  return shuffleArray(charades);
+};
+
+
 export const CharadesList = () => {
   const [charades, setCharades] = useState<string[]>([]);
 

@@ -8,7 +8,7 @@ export default function App() {
       <h1 className="forehead"> FOREHEAD </h1>
       <div className='navigateButtonsPanel'>
         <NavigateButton playPath="/playSongs" topCaption='PLAY' bottomCaption='SONGS'/>
-        <NavigateButton playPath="/playSongs" topCaption='PLAY' bottomCaption='CHARADES'/>
+        <NavigateButton playPath="/playCharades" topCaption='PLAY' bottomCaption='CHARADES'/>
         <NavigateButton playPath="/add" topCaption='ADD' bottomCaption='RECORDS'/>
       </div>
       <p className="signature"> Czółko v.0.1 </p>
