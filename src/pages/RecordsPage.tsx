@@ -18,7 +18,6 @@ const RecordsPage = () => {
         <HomeButton />
         <BackButton />
       </div>
-
       {collectionName === 'Songs' ? <SongsList /> : <CharadesList />}
       <Signature />
     </div>

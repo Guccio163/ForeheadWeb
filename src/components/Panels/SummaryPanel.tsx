@@ -5,8 +5,8 @@ import { Results as CharadesResults } from '../../pages/CharadesGamePage';
 import Signature from '../Signature';
 
 interface Props {
-  playAgain: any;
-  setScore: any;
+  playAgain: () => void;
+  setScore: (startScore: number) => void;
   score: number;
   questions: SongsResults[] | CharadesResults[];
 }
@@ -22,11 +22,11 @@ export default function SummaryPage({ playAgain, setScore, score, questions }: P
           playAgain();
           setScore(0);
         }}
-        style={{ marginBottom: '5px' }}
+        style={{ marginBottom: '20px' }}
       >
         press to play again
       </button>
-      <Signature/>
+      <Signature />
     </div>
   );
 }
