@@ -1,17 +1,17 @@
-import { HomeButton } from '../components/Buttons/HomeButton';
-import { QuestionsList } from '../components/Lists/QuestionsList';
-import { Results as SongsResults} from './SongGamePage';
-import { Results as CharadesResults } from './CharadesGamePage';
-
+import { HomeButton } from '../Buttons/HomeButton';
+import { QuestionsList } from '../Lists/QuestionsList';
+import { Results as SongsResults } from '../../pages/SongGamePage';
+import { Results as CharadesResults } from '../../pages/CharadesGamePage';
+import Signature from '../Signature';
 
 interface Props {
   playAgain: any;
-  setTotal: any;
+  setScore: any;
   score: number;
   questions: SongsResults[] | CharadesResults[];
 }
 
-export default function SummaryPage({ playAgain, setTotal, score, questions }: Props) {
+export default function SummaryPage({ playAgain, setScore, score, questions }: Props) {
   return (
     <div className="summaryPage">
       <HomeButton />
@@ -20,12 +20,13 @@ export default function SummaryPage({ playAgain, setTotal, score, questions }: P
       <button
         onClick={() => {
           playAgain();
-          setTotal(0);
+          setScore(0);
         }}
         style={{ marginBottom: '5px' }}
       >
         press to play again
       </button>
+      <Signature/>
     </div>
   );
 }

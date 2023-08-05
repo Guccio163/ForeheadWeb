@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {
-  playPath: string;
+  naviPath: string;
   topCaption: string;
   bottomCaption: string;
 }
@@ -17,7 +17,7 @@ function getIconName(caption:string):string{
   }
 }
 
-const NavigateButton = ({ playPath, topCaption, bottomCaption }: Props) => {
+const NavigateButton = ({ naviPath, topCaption, bottomCaption }: Props) => {
   const navi = useNavigate();
   const [focus, setFocus] = useState(false);
   const iconName = getIconName(bottomCaption);
@@ -27,7 +27,7 @@ const NavigateButton = ({ playPath, topCaption, bottomCaption }: Props) => {
   return (
     <button
       className={focus ? 'navigateButton focused' : 'navigateButton'}
-      onClick={() => navi(playPath)}
+      onClick={() => navi(naviPath)}
       onMouseEnter={() => setFocus(true)}
       onMouseLeave={() => setFocus(false)}
     >

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './pages/ErrorPage.tsx';
-import GamePage from './pages/SongGamePage.tsx';
+import SongGamePage from './pages/SongGamePage.tsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import AddRecordPage from './pages/AddRecordPage.tsx';
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/playSongs',
-    element: <GamePage />,
+    element: <SongGamePage />,
     errorElement: <ErrorPage />,
   },
   {

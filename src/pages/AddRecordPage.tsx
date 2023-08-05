@@ -3,6 +3,7 @@ import { firestore } from '../firebase';
 import { doc, collection, setDoc, getCountFromServer } from 'firebase/firestore';
 import { HomeButton } from '../components/Buttons/HomeButton';
 import { useNavigate } from 'react-router-dom';
+import Signature from '../components/Signature';
 
 export default function AddPanel() {
   const navi = useNavigate();
@@ -104,6 +105,7 @@ export default function AddPanel() {
           </button>
         </form>
       </div>
+      <Signature />
     </div>
   );
 }

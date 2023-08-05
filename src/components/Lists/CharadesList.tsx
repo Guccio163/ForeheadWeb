@@ -11,6 +11,17 @@ export const shuffleArray = (array: string[]) => {
   return shuffledArray;
 };
 
+export const getCharades = async () => {
+    let charades: string[] = [];
+    const querySnapshot = await getDocs(collection(firestore, 'Charades'));
+    querySnapshot.forEach((doc) => {
+      let charade = doc.data();
+      let newCharade: string = charade.Text;
+      charades.push(newCharade);
+    });
+    return charades;
+  };
+
 export const getCharadesShuffled = async () => {
   let charades: string[] = [];
   const querySnapshot = await getDocs(collection(firestore, 'Charades'));

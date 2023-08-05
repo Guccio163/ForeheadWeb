@@ -1,32 +1,30 @@
-import { useState, useEffect } from 'react';
-import GuessedButton from '../components/Buttons/GuessedButton.tsx';
-import SummaryPage from './SummaryPage.tsx';
 import 'bootstrap/dist/css/bootstrap.css';
-import { HomeButton } from '../components/Buttons/HomeButton.tsx';
 import { Song, getSongsShuffled } from '../components/Lists/SongsList.tsx';
+import { useState, useEffect } from 'react';
+import SongGamePanel from '../components/Panels/SongGamePanel.tsx';
+import SummaryPage from '../components/Panels/SummaryPanel.tsx';
 
 export type Results = {
-  tit: string;
-  art: string;
-  res: string;
+  title: string;
+  artist: string;
+  answer: string;
 };
 
-export default function GamePanel() {
-  const [total, setTotal] = useState(0);
-  const [qCount, setQCount] = useState(0);
+export default function SongGamePage() {
+  const [score, setScore] = useState(0);
+  const [questionCount, setQuestionCount] = useState(0);
   const [questions, setQuestions] = useState<Song[]>([]);
-  const [recordArray, setRecordArray] = useState<Results[]>([]);
+  const [results, setResults] = useState<Results[]>([]);
 
-  function addToList(tit: string, art: string, res: string) {
-    const rec = { tit, art, res };
-    setRecordArray([...recordArray, rec]);
+  function addToList(title: string, artist: string, answer: string) {
+    const result = { title, artist, answer };
+    setResults([...results, result]);
   }
 
   async function fetchSongs() {
     try {
-      const qr = await getSongsShuffled();
-      setQuestions(qr);
-      console.log('qr', qr);
+      const allQuestions = await getSongsShuffled();
+      setQuestions(allQuestions);
     } catch (error) {
       console.error('Błąd podczas pobierania danych:', error);
     }
@@ -36,56 +34,32 @@ export default function GamePanel() {
     fetchSongs();
   }, []);
 
-  if (qCount < 4) {
+  if (questionCount < 4) {
     return (
-      <div className="gamePanel">
-        {questions[qCount]?.artist && questions[qCount].artist.length > 0 && (
-          <div>
-            <HomeButton />
-            <p className="title">{questions[qCount].title}</p>
-            <p className="artist">{questions[qCount].artist}</p>
-          </div>
-        )}
-        <p className="total">
-          {total}/{qCount}
-        </p>
-        <div className="buttonWrapper">
-          <GuessedButton
-            option="wrong"
-            onClick={() => {
-              setQCount((prevIndex) => prevIndex + 1);
-
-              addToList(questions[qCount].title, questions[qCount].artist, 'f');
-            }}
-          />
-          <GuessedButton
-            option="right"
-            onClick={() => {
-              setQCount((prevIndex) => prevIndex + 1);
-
-              setTotal((total) => total + 1);
-              addToList(questions[qCount].title, questions[qCount].artist, 'r');
-            }}
-          />
-        </div>{' '}
-        <br />
-        <p className="signature"> Czółko v.0.1 </p>
-      </div>
+      <>
+        <SongGamePanel
+          questions={questions}
+          questionCount={questionCount}
+          score={score}
+          increaseQCount={() => setQuestionCount((prevIndex) => prevIndex + 1)}
+          increaseScore={() => setScore((score) => score + 1)}
+          addToList={addToList}
+        />
+      </>
     );
   } else {
     return (
       <>
         <SummaryPage
           playAgain={() => {
-            setQCount(0);
-            setRecordArray([]);
+            setQuestionCount(0);
+            setResults([]);
             setQuestions(questions);
           }}
-          setTotal={setTotal}
-          score={total}
-          questions={recordArray}
+          setScore={setScore}
+          score={score}
+          questions={results}
         />
-        <p className="signature"> Czółko v.0.1 </p>
       </>
     );
   }

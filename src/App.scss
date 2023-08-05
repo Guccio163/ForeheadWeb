@@ -1,0 +1,216 @@
+/* GENERAL */
+
+p {
+    margin-top: 0;
+    padding-bottom: 2px black;
+    font-size: 10px;
+}
+
+/* -------- PAGES -------- */
+
+/* HOME SCREEN */
+
+
+.homeScreen {
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.forehead {
+    font-size: 7dvw;
+    margin-bottom: 100px;
+    color: rgb(165, 163, 163);
+}
+
+.navigateButtonsPanel {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 100px;
+}
+
+.signature {
+    font-size: 2dvw;
+    bottom: 0;
+    color: rgb(160, 162, 164);
+}
+
+/* GAME PAGE */
+
+.gamePanel {
+    height: 100dvh;
+    background-color: rgb(178, 225, 255);
+    flex-direction: row;
+    color: rgb(0, 0, 0);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.buttonWrapper {
+    height: 30dvh;
+    display: flex;
+    flex-direction: row;
+}
+
+.title {
+    font-size: xx-large;
+    text-align: center;
+    padding-top: 20px;
+    margin-top: 0;
+}
+
+.artist {
+    font-size: medium;
+    text-align: right;
+    margin-right: 10%;
+}
+
+.total {
+    font-size: 30px;
+    text-align: center;
+    color: gold;
+    font-weight: bold;
+}
+
+/* ADD RECORD PAGE */
+
+.myForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formField {
+    width: 150px;
+    margin: 10px;
+}
+
+.formButton {
+    width: 80px;
+    margin: 10px;
+}
+
+.seeRecordsButton {
+    width: 90px;
+    align-self: center;
+}
+
+/* SEE RECORDS PAGE */
+
+.recordsPage {
+    display: flex;
+    flex-direction: row;
+}
+
+.recordsPageNavBar {
+    display: flex;
+    flex-direction: column;
+    width: 80px;
+}
+
+.recordsList {
+    margin-top: 50px;
+}
+
+/* SUMMARY PAGE */
+
+.summaryPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* -------- COMPONENTS -------- */
+
+/* NAVIGATE BUTTON */
+
+.navigateButton {
+    width: 20dvw;
+    height: 23dvh;
+    margin-left: 1.5dvw;
+    margin-right: 1.5dvw;
+    background: transparent;
+    border: 0;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.focused {
+    background-color: rgb(235, 235, 235);
+}
+
+.caption {
+    align-self: center;
+    font-size: 2.5dvh;
+    position: relative;
+}
+
+.topCaption {
+    top: 10px;
+    left: -1px;
+}
+
+.bottomCaption {
+    top: -27px;
+}
+
+.playicon {
+    font-size: 8dvh;
+    position: relative;
+    align-self: center;
+    margin-top: 11px;
+    margin-bottom: 9px;
+    top: -16px;
+}
+
+.musicicon {
+    font-size: 7.6dvh;
+    position: relative;
+    align-self: center;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    top: -16px;
+}
+
+.plusicon {
+    font-size: 7dvh;
+    position: relative;
+    align-self: center;
+    margin-top: 1.9dvh;
+    margin-bottom: 2dvh;
+    top: -16px;
+}
+
+/* GUESSED BUTTON */
+
+.guessedButton {
+    text-align: center;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    font-weight: bolder;
+    border-radius: 20px;
+    border: 1px;
+    height: 100%;
+    width: 45%;
+    background-blend-mode: darken;
+}
+
+.right {
+    background-color: rgb(105, 238, 105, 0.8);
+}
+
+.wrong {
+    background-color: rgb(222, 39, 39, 0.8);
+}
+
+/* HOME BUTTON */
+
+.homeButton {
+    background: transparent;
+    border: 0;
+    margin-top: 5px;
+    margin-left: 5px;
+    align-self: baseline;
+}

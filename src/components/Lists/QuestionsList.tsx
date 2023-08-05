@@ -10,13 +10,13 @@ function isRight(option: string) {
 }
 
 export const QuestionsList = ({ questions }: Props) => {
-  if ('art' in questions[0]) {
+  if ('artist' in questions[0]) {
     const newResults = questions as SongResults[];
     return (
       <ul>
         {newResults.map((record, index) => (
-          <li key={index} style={{ color: isRight(record.res) ? 'rgb(57, 200, 57)' : 'grey' }}>
-            {index} {record.tit} {record.art}
+          <li key={index} style={{ color: isRight(record.answer) ? 'rgb(57, 200, 57)' : 'grey' }}>
+            {index} {record.title} {record.artist}
           </li>
         ))}
       </ul>
