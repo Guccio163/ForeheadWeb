@@ -3,6 +3,7 @@ import { getCharadesShuffled } from '../components/Lists/CharadesList.tsx';
 import { useState, useEffect } from 'react';
 import CharadesGamePanel from '../components/Panels/CharadesGamePanel.tsx';
 import SummaryPage from '../components/Panels/SummaryPanel.tsx';
+import { LoadingPanel } from '../components/Panels/LoadingPanel.tsx';
 
 export type Results = {
   tit: string;
@@ -11,6 +12,8 @@ export type Results = {
 
 export default function CharadesGamePage() {
   const [score, setScore] = useState(0);
+  const [isLoaded, setLoaded] = useState(false);
+
   const [questionCount, setQuestionCount] = useState(0);
   const [questions, setQuestions] = useState<string[]>([]);
   const [recordArray, setRecordArray] = useState<Results[]>([]);
@@ -25,6 +28,7 @@ export default function CharadesGamePage() {
       const qr = await getCharadesShuffled();
       setQuestions(qr);
       console.log('qr', qr);
+      setLoaded(true);
     } catch (error) {
       console.error('Błąd podczas pobierania danych:', error);
     }
@@ -35,7 +39,7 @@ export default function CharadesGamePage() {
   }, []);
 
   if (questionCount < 2) {
-    return (
+    return isLoaded ? (
       <>
         <CharadesGamePanel
           questions={questions}
@@ -46,6 +50,8 @@ export default function CharadesGamePage() {
           addToList={addToList}
         />
       </>
+    ) : (
+      <LoadingPanel />
     );
   } else {
     return (

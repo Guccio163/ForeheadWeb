@@ -31,17 +31,17 @@ p {
     margin-bottom: 100px;
 }
 
-.signature {
-    font-size: 2dvw;
-    bottom: 0;
-    color: rgb(160, 162, 164);
-}
-
 /* GAME PAGE */
 
-.gamePanel {
+.gamePanelWrapper{
     height: 100dvh;
-    background-color: rgb(178, 225, 255);
+}
+
+.gamePanel {
+    width: 100dvw;
+    position: absolute;
+    top: 15dvh;
+    // background-color: rgb(178, 225, 255);
     flex-direction: row;
     color: rgb(0, 0, 0);
     font-family: Arial, Helvetica, sans-serif;
@@ -57,7 +57,7 @@ p {
     font-size: xx-large;
     text-align: center;
     padding-top: 20px;
-    margin-top: 0;
+    margin-top: -30px;
 }
 
 .artist {
@@ -120,9 +120,40 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 /* -------- COMPONENTS -------- */
+
+// SIGNATURE
+
+.signature {
+    font-size: 10px;
+    color: rgb(160, 162, 164);
+    align-self:flex-end;
+    position: absolute;
+    bottom: 0;
+    right: 50dvw;
+}
+
+// LOADING SCREEN
+
+.loadingScreen{
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+    padding-top: 40dvh;
+    align-items: center;
+    text-align: center;
+}
+
+.bufferButton{
+    margin-top: 15px;
+    font-size: 20px;
+    border-width: 1px;
+    border-radius: 10px;
+    background-color: transparent;
+}
 
 /* NAVIGATE BUTTON */
 

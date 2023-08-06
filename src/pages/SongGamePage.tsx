@@ -3,6 +3,7 @@ import { Song, getSongsShuffled } from '../components/Lists/SongsList.tsx';
 import { useState, useEffect } from 'react';
 import SongGamePanel from '../components/Panels/SongGamePanel.tsx';
 import SummaryPage from '../components/Panels/SummaryPanel.tsx';
+import { LoadingPanel } from '../components/Panels/LoadingPanel.tsx';
 
 export type Results = {
   title: string;
@@ -12,6 +13,8 @@ export type Results = {
 
 export default function SongGamePage() {
   const [score, setScore] = useState(0);
+  const [isLoaded, setLoaded] = useState(false);
+
   const [questionCount, setQuestionCount] = useState(0);
   const [questions, setQuestions] = useState<Song[]>([]);
   const [results, setResults] = useState<Results[]>([]);
@@ -25,6 +28,7 @@ export default function SongGamePage() {
     try {
       const allQuestions = await getSongsShuffled();
       setQuestions(allQuestions);
+      setLoaded(true);
     } catch (error) {
       console.error('Błąd podczas pobierania danych:', error);
     }
@@ -35,7 +39,7 @@ export default function SongGamePage() {
   }, []);
 
   if (questionCount < 4) {
-    return (
+    return isLoaded ? (
       <>
         <SongGamePanel
           questions={questions}
@@ -46,6 +50,8 @@ export default function SongGamePage() {
           addToList={addToList}
         />
       </>
+    ) : (
+      <LoadingPanel />
     );
   } else {
     return (
