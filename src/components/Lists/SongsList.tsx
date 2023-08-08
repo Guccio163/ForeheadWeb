@@ -38,7 +38,6 @@ export const getSongs = async () => {
   return songi;
 };
 
-
 export const SongsList = () => {
   const [songi, setSongi] = useState<Song[]>([]);
 
@@ -53,18 +52,60 @@ export const SongsList = () => {
     setSongi(songi);
   };
 
-    useEffect(() => {
-      getSongs();
-      console.log('xd');
-    }, []);
-    
+  useEffect(() => {
+    getSongs();
+    console.log('xd');
+  }, []);
+
   return (
-    <ul className="recordsList">
-      {songi.map((item, index) => (
-        <li key={index}>
-          {item.artist} // {item.title}
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul className="recordsList list-group">
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            width: '80dvw',
+            fontWeight: 'bolder',
+            border: '2px solid black',
+            backgroundColor: 'lightgrey',
+          }}
+        >
+          <div
+            className="recordTitle list-group-item"
+            style={{
+              backgroundColor: 'transparent',
+            }}
+          >
+            {' '}
+            Title{' '}
+          </div>
+          <div
+            className="recordArtist list-group-item"
+            style={{
+              backgroundColor: 'transparent',
+            }}
+          >
+            {' '}
+            Artist{' '}
+          </div>
+        </div>
+        {songi.map((object, index) => (
+          <div
+            key={index}
+            style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', width: '80dvw' }}
+          >
+            <div className="recordTitle list-group-item">{object.title}</div>
+            <div className="recordArtist list-group-item">{object.artist}</div>
+          </div>
+        ))}
+      </ul>
+      {/* <ul>
+        <li>element</li>
+        <li>element</li>
+        <li>element</li>
+        <li>element</li>
+        <li>element</li>
+      </ul> */}
+    </>
   );
 };

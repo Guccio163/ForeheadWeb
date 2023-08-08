@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import { Song, getSongsShuffled } from '../components/Lists/SongsList.tsx';
+import { Song, getSongsShuffled, shuffleArray } from '../components/Lists/SongsList.tsx';
 import { useState, useEffect } from 'react';
 import SongGamePanel from '../components/Panels/SongGamePanel.tsx';
 import SummaryPage from '../components/Panels/SummaryPanel.tsx';
@@ -38,7 +38,7 @@ export default function SongGamePage() {
     fetchSongs();
   }, []);
 
-  if (questionCount < 4) {
+  if (questionCount < 10) {
     return isLoaded ? (
       <>
         <SongGamePanel
@@ -60,7 +60,7 @@ export default function SongGamePage() {
           playAgain={() => {
             setQuestionCount(0);
             setResults([]);
-            setQuestions(questions);
+            setQuestions((questions)=>shuffleArray(questions));
           }}
           setScore={setScore}
           score={score}

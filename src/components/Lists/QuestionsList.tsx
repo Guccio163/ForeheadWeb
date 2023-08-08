@@ -13,10 +13,10 @@ export const QuestionsList = ({ questions }: Props) => {
   if ('artist' in questions[0]) {
     const newResults = questions as SongResults[];
     return (
-      <ul>
+      <ul className='list-group'>
         {newResults.map((record, index) => (
-          <li key={index} style={{ color: isRight(record.answer) ? 'rgb(57, 200, 57)' : 'grey' }}>
-            {index} {record.title} {record.artist}
+          <li className='list-group-item' key={index} style={{ color: isRight(record.answer) ? 'rgb(57, 200, 57)' : 'grey' }}>
+           {record.title} // {record.artist}
           </li>
         ))}
       </ul>

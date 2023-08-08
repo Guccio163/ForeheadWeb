@@ -17,6 +17,7 @@ export default function SummaryPage({ playAgain, setScore, score, questions }: P
       <HomeButton />
       <h2 style={{ margin: '10px' }}>Congratulations, you scored {score} points!</h2>
       <QuestionsList questions={questions} />
+      <br/>
       <button
         onClick={() => {
           playAgain();

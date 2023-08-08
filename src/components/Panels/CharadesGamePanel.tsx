@@ -20,35 +20,37 @@ interface Props {
 
 export default function CharadesGamePanel({questions, questionCount, score, increaseQCount, increaseScore, addToList}:Props){
   return (
-    <div className="gamePanel">
-      {questions[questionCount] && questions[questionCount].length > 0 && (
-        <div>
-          <HomeButton />
-          <p className="title">{questions[questionCount]}</p>
+    <div className="gamePanelWrapper">
+      <div className="gamePanel">
+        {questions[questionCount] && questions[questionCount].length > 0 && (
+          <div>
+            <HomeButton />
+            <p className="title">{questions[questionCount]}</p>
+          </div>
+        )}
+        <p className="total">
+          {score}/{questionCount}
+        </p>
+        <div className="buttonWrapper">
+          <GuessedButton
+            option="wrong"
+            onClick={() => {
+              increaseQCount();
+              addToList(questions[questionCount], 'f');
+            }}
+          />
+          <GuessedButton
+            option="right"
+            onClick={() => {
+              increaseQCount();
+              increaseScore();
+              addToList(questions[questionCount], 'r');
+            }}
+          />
         </div>
-      )}
-      <p className="total">
-        {score}/{questionCount}
-      </p>
-      <div className="buttonWrapper">
-        <GuessedButton
-          option="wrong"
-          onClick={() => {
-            increaseQCount();
-            addToList(questions[questionCount], 'f');
-          }}
-        />
-        <GuessedButton
-          option="right"
-          onClick={() => {
-            increaseQCount();
-            increaseScore();
-            addToList(questions[questionCount], 'r');
-          }}
-        />
+        <br />
       </div>
-      <br />
-      <Signature/>
+      <Signature />
     </div>
   );
 };

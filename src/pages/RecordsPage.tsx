@@ -13,14 +13,16 @@ const RecordsPage = () => {
   const collectionName: string = queryParams.get('collectionName') ?? '';
 
   return (
-    <div className="recordsPage">
-      <div className="recordsPageNavBar">
-        <HomeButton />
-        <BackButton />
+    <>
+      <div className="recordsPage">
+        <div className="recordsPageNavBar">
+          <HomeButton />
+          <BackButton />
+        </div>
+        {collectionName === 'Songs' ? <SongsList /> : <CharadesList />}
       </div>
-      {collectionName === 'Songs' ? <SongsList /> : <CharadesList />}
-      <Signature />
-    </div>
+      <Signature isList={true} />
+    </>
   );
 };
 
