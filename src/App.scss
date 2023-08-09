@@ -1,0 +1,369 @@
+
+// Breakpoints
+$BreakpointNormalMobile: 500px;
+
+$BreakpointMobileMax: 960px;
+$BreakpointSmallMin: 961px;
+
+$BreakpointSmallMax: 1280px;
+$BreakpointMediumMin: 1281px;
+
+$BreakpointMediumMax: 1600px;
+$BreakpointLargeMin: 1601px;
+
+$BreakpointLargeMax: 1920px;
+$BreakpointXLargeMin: 1921px;
+
+$icon-color-initial: rgb(255, 102, 0);
+$icon-color-final: rgb(251, 255, 0);
+
+// FUNCTIONS
+
+@function sideMargins($componentWidth) {
+    @return calc((100dvw - $componentWidth)/2);
+}
+
+@function calcPx($componentWidth, $percents) {
+    @return calc($componentWidth * $percents / 100);
+}
+
+/* GENERAL */
+
+p {
+    margin-top: 0;
+    padding-bottom: 2px black;
+    font-size: 10px;
+}
+
+/* -------- PAGES -------- */
+
+/* HOME SCREEN */
+
+
+.homeScreen {
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.forehead {
+    font-size: 7dvw;
+    margin-bottom: 20dvh;
+    color: rgb(165, 163, 163);
+}
+
+.navigateButtonsPanel {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 100px;
+}
+
+
+/* GAME PAGE */
+
+.gamePanelWrapper{
+    height: 100dvh;
+}
+
+.gamePanel {
+    width: 100dvw;
+    position: absolute;
+    top: 15dvh;
+    // background-color: rgb(178, 225, 255);
+    flex-direction: row;
+    color: rgb(0, 0, 0);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.buttonWrapper {
+    height: 30dvh;
+    display: flex;
+    flex-direction: row;
+}
+
+.title {
+    font-size: xx-large;
+    text-align: center;
+    padding-top: 20px;
+    margin-top: -30px;
+}
+
+.artist {
+    font-size: medium;
+    text-align: right;
+    margin-right: 10%;
+}
+
+.total {
+    font-size: 30px;
+    text-align: center;
+    color: gold;
+    font-weight: bold;
+}
+
+/* ADD RECORD PAGE */
+
+.myForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formField {
+    width: 150px;
+    margin: 10px;
+}
+
+.formButton {
+    width: 80px;
+    margin: 10px;
+}
+
+.seeRecordsButton {
+    width: 90px;
+    align-self: center;
+}
+
+
+/* SEE RECORDS PAGE */
+
+.recordsPage {
+    display: flex;
+    flex-direction: row;
+}
+
+.recordsPageNavBar {
+    display: flex;
+    flex-direction: column;
+    width: 80px;
+}
+
+.recordsList {
+    margin-top: 50px;
+}
+
+.recordTitle{
+    border-left: 2px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    padding-left: 10px;
+}
+
+.recordArtist{
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 2px solid black;
+    padding-left: 10px;
+}
+
+/* SUMMARY PAGE */
+
+.summaryPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+/* -------- COMPONENTS -------- */
+
+
+// LOADING SCREEN
+
+.loadingScreen{
+    display: flex;
+    flex-direction: column;
+    font-size: 5dvw;
+    padding-top: 40dvh;
+    align-items: center;
+    text-align: center;
+}
+
+.bufferButton{
+    margin-top: 15px;
+    font-size: 20px;
+    border-width: 1px;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+/* NAVIGATE BUTTON */
+
+.navigateButton {
+    width: 21dvw;
+    height: 23dvh;
+    margin-left: 1.5dvw;
+    margin-right: 1.5dvw;
+    background: transparent;
+    border: 0;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.focused {
+    background-color: rgb(235, 235, 235);
+}
+
+.caption {
+    align-self: center;
+    font-size: 21px;
+    position: relative;
+}
+
+.topCaption {
+    top: 10px;
+    left: -1px;
+}
+
+.bottomCaption {
+    top: -27px;
+}
+
+.playicon {
+    font-size: 8dvh;
+    position: relative;
+    align-self: center;
+    margin-top: 11px;
+    margin-bottom: 9px;
+    top: -16px;
+    
+}
+
+.musicicon {
+    font-size: 7.6dvh;
+    position: relative;
+    align-self: center;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    top: -16px;
+    animation: colorChange 1.5s infinite alternate;
+}
+
+@keyframes colorChange {
+    from {
+        color: $icon-color-initial;
+    }
+
+    to {
+        color: $icon-color-final;
+    }
+}
+
+.plusicon {
+    font-size: 7dvh;
+    position: relative;
+    align-self: center;
+    margin-top: 1.9dvh;
+    margin-bottom: 2dvh;
+    top: -16px;
+}
+
+
+
+/* GUESSED BUTTON */
+
+.guessedButton {
+    text-align: center;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    font-weight: bolder;
+    border-radius: 20px;
+    border: 1px;
+    height: 100%;
+    width: 45%;
+    background-blend-mode: darken;
+}
+
+.right {
+    background-color: rgb(105, 238, 105, 0.8);
+}
+
+.wrong {
+    background-color: rgb(222, 39, 39, 0.8);
+}
+
+// SIGNATURE
+
+.signature {
+    font-size: 10px;
+    color: rgb(160, 162, 164);
+    align-self: flex-end;
+    position: absolute;
+    bottom: 0;
+    right: 44dvw;
+}
+
+/* HOME BUTTON */
+
+.homeButton {
+    background: transparent;
+    border: 0;
+    margin-top: 5px;
+    margin-left: 5px;
+    align-self: baseline;
+}
+
+
+///////////////////////// MEDIA QUERIES /////////////////////////
+
+@media (max-width: $BreakpointNormalMobile){
+
+    // HOME SCREEN
+
+    .navigateButtonsPanel{
+        flex-direction: column;
+    }
+
+    .forehead {
+        font-size: 12dvw;
+        margin-bottom: 5dvh;
+    }
+
+    .navigateButton {
+        width: calcPx($BreakpointNormalMobile, 21);
+    }
+}
+
+@media (min-width: $BreakpointSmallMin){
+
+    // HOME SCREEN
+
+    .homeScreen {
+        width:$BreakpointSmallMin;
+        margin-left: sideMargins($BreakpointSmallMin);
+    }
+
+    .forehead {
+        font-size: calcPx($BreakpointSmallMin, 7);
+    }
+
+    .navigateButton {
+        width: calcPx($BreakpointSmallMin, 20);
+        height: 160px;
+        margin-left: calcPx($BreakpointSmallMin, 1.5);
+        margin-right: calcPx($BreakpointSmallMin, 1.5);
+    }
+
+    .playicon {
+        font-size: 46px;
+        margin-top: 11px;
+        margin-bottom: 9px;
+    }
+
+    .musicicon {
+        font-size: 44px;
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+
+    .plusicon {
+        font-size: 43px;
+        margin-top: 11px;
+        margin-bottom: 12px;
+    }
+}

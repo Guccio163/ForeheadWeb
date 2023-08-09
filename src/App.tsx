@@ -1,82 +1,18 @@
-import { useState, useEffect } from "react";
-import "./App.css";
-import GuessedButton from "./components/GuessedButton.tsx";
-// import handleSubmit from "./handles/handlesubmit.tsx";
+import './App.scss';
+import NavigateButton from './components/Buttons/NavigateButton';
+import Signature from './components/Signature';
 
-function App() {
-  const [artist, setArtist] = useState("lolz");
-  const [title, setTitle] = useState("Basic");
-  const [currentNum, setCurrentNum] = useState(0);
-  const [total, setTotal] = useState(0);
-
-
-  const getRandomNumberInRange = (min: number, max: number): number => {
-    let ans = Math.floor(Math.random() * (max - min)) + min;
-    ans = ans === currentNum ? (ans + 1) % max : ans;
-    return ans;
-  }
-
-  const refreshData = (myJson: string | any[]) => {
-    setCurrentNum(getRandomNumberInRange(0, myJson.length));
-        setArtist(myJson[currentNum].artist);
-        setTitle(myJson[currentNum].title);
-  }
-
-  const increaseTotal = (total: number) => {
-    setTotal(total+1);
-  }
-
-  const getData = () => {
-    fetch("songs.json", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((response) => {
-        console.log(response);
-        return response.json();
-      })
-      .then((myJson) => {
-        console.log(myJson);
-        refreshData(myJson);
-      });
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
+export default function App() {
   return (
-    <div className="root">
-      <h6> Czółko v.0.1 </h6>
-      {artist && artist.length > 0 && (
-        <div>
-          <p className="title">{title}</p>
-          <p className="artist">{artist}</p>
+    // <div>
+      <div className="homeScreen">
+        <h1 className="forehead"> FOREHEAD </h1>
+        <div className="navigateButtonsPanel">
+          <NavigateButton naviPath="/playSongs" topCaption="PLAY" bottomCaption="SONGS" />
+          <NavigateButton naviPath="/playCharades" topCaption="PLAY" bottomCaption="CHARADES" />
+          <NavigateButton naviPath="/add" topCaption="ADD" bottomCaption="RECORDS" />
         </div>
-      )}
-      <p className="total">{total}</p>
-      <div className="buttonWrapper">
-        <GuessedButton
-          option="wrong"
-          funct={() => {
-            getData();
-          }}
-        />
-        <GuessedButton
-          option="right"
-          funct={() => {
-            getData();
-            increaseTotal(total);
-          }}
-        />
+        <Signature />
       </div>
-
-      <p className="currentNum">{currentNum}</p>
-
-    </div>
   );
 }
-
-export default App;
