@@ -8,17 +8,25 @@ import { useForm } from 'react-hook-form';
 
 export default function AddPanel() {
   const navi = useNavigate();
-  const collectionRef: any = useRef();
+  const collectionRef = useRef<HTMLSelectElement>(null);
   const [isSongs, setIstSongs] = useState(true);
-  const { handleSubmit, register, formState: {}, watch, reset } = useForm();
+  const {
+    handleSubmit,
+    register,
+    formState: {},
+    watch,
+    reset,
+  } = useForm();
 
   async function getDocCount(): Promise<number> {
-    const ref = collection(firestore, collectionRef.current.value);
-
     try {
-      const snapshot = await getCountFromServer(ref);
-      const result = snapshot.data().count;
-      return result;
+      if (collectionRef.current) {
+        const ref = collection(firestore, collectionRef.current.value);
+        const snapshot = await getCountFromServer(ref);
+        const result = snapshot.data().count;
+        return result;
+      }
+      return 0;
     } catch (error) {
       console.error('Error fetching integer:', error);
       return 0;
@@ -26,18 +34,20 @@ export default function AddPanel() {
   }
 
   const handleSave = async () => {
-    const ref = collection(firestore, collectionRef.current.value);
-    let docCount = await getDocCount();
+    if (collectionRef.current?.value) {
+      const ref = collection(firestore, collectionRef.current.value);
+      let docCount = await getDocCount();
 
-    if (collectionRef.current.value === 'Songs') {
-      await setDoc(doc(ref, `${docCount}. ${watch().title}`), {
-        Artist: watch().artist,
-        Title: watch().title,
-      });
-    } else {
-      await setDoc(doc(ref, `${docCount}. ${watch().text}`), {
-        Text: watch().text,
-      });
+      if (collectionRef.current?.value === 'Songs') {
+        await setDoc(doc(ref, `${docCount}. ${watch().title}`), {
+          Artist: watch().artist,
+          Title: watch().title,
+        });
+      } else {
+        await setDoc(doc(ref, `${docCount}. ${watch().text}`), {
+          Text: watch().text,
+        });
+      }
     }
     reset();
   };
@@ -87,7 +97,7 @@ export default function AddPanel() {
           <button
             className="seeRecordsButton"
             onClick={() => {
-              navi(`/records?collectionName=${collectionRef.current.value}`);
+              navi(`/records?collectionName=${collectionRef.current?.value}`);
             }}
           >
             RECORDS
